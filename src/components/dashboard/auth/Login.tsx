@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import axios from 'axios';
-import '@/styles/login.css';
+// Login CSS is imported globally in main.tsx
 
 interface LoginForm {
   username: string;
