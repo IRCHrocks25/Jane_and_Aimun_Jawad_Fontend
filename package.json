@@ -61,6 +61,6 @@
       "scripts": {
             "dev": "vite",
             "build": "node node_modules/vite/bin/vite.js build",
-            "preview": "vite preview --port ${PORT:-3000} --host"
+            "preview": "node node_modules/vite/bin/vite.js preview --port ${PORT:-3000} --host"
       }
 }
