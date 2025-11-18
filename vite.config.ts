@@ -107,4 +107,13 @@
         },
       },
     },
+    preview: {
+      port: 3000,
+      host: true,
+      allowedHosts: [
+        'janeandaimunjawadfontend-production.up.railway.app',
+        'localhost',
+        '127.0.0.1',
+      ],
+    },
   });
