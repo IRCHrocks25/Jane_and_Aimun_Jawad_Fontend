@@ -9,8 +9,9 @@ const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_A
 export const authService = {
   async login(username: string, password: string): Promise<void> {
     // Authenticate with Django
+    // Note: API_BASE_URL already includes /api, so we don't add it again
     const response = await axios.post(
-      `${API_BASE_URL}/api/auth/login/`,
+      `${API_BASE_URL}/auth/login/`,
       { username, password },
       { withCredentials: true } // Important for session cookies
     );
@@ -26,8 +27,9 @@ export const authService = {
   async logout(): Promise<void> {
     localStorage.removeItem('auth_token');
     // Optionally call Django logout endpoint
+    // Note: API_BASE_URL already includes /api, so we don't add it again
     try {
-      await axios.post(`${API_BASE_URL}/api/auth/logout/`, {}, { withCredentials: true });
+      await axios.post(`${API_BASE_URL}/auth/logout/`, {}, { withCredentials: true });
     } catch (error) {
       // Ignore errors on logout
     }
