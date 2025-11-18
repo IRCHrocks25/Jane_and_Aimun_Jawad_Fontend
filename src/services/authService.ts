@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+// Use production backend URL in production, otherwise use localhost or env variable
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || import.meta.env.VITE_API_URL || 
+  (import.meta.env.PROD 
+    ? 'https://janeandaimunjawadbackend-production.up.railway.app/api'
+    : 'http://localhost:8000/api');
 
 export const authService = {
   async login(username: string, password: string): Promise<void> {

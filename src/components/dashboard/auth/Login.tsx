@@ -19,8 +19,12 @@ const Login = () => {
   const onSubmit = async (data: LoginForm) => {
     setLoading(true);
     try {
-      // Use localhost instead of 127.0.0.1 to match React's origin
-      const djangoUrl = 'http://localhost:8000';
+      // Use production backend URL in production, otherwise use localhost
+      const djangoUrl = import.meta.env.VITE_API_BASE_URL?.replace('/api', '') || 
+        import.meta.env.VITE_API_URL?.replace('/api', '') ||
+        (import.meta.env.PROD 
+          ? 'https://janeandaimunjawadbackend-production.up.railway.app'
+          : 'http://localhost:8000');
       
       // First, get CSRF token from Django
       const csrfResponse = await axios.get(`${djangoUrl}/dashboard/login/`, {
@@ -61,7 +65,7 @@ const Login = () => {
       if (loginResponse.data?.success) {
         toast.success('Login successful!');
         setTimeout(() => {
-          window.location.href = 'http://localhost:8000/dashboard/';
+          window.location.href = `${djangoUrl}/dashboard/`;
         }, 500);
       } else {
         throw new Error('Login failed');
